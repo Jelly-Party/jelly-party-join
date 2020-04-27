@@ -76,7 +76,11 @@ export default {
       this.requestRedirect();
     },
     requestRedirect: function() {
-      let obj = { redirectURL: redirectURL, jellyPartyId: jellyPartyId };
+      let obj = {
+        permissionURL: permissionURL,
+        redirectURL: redirectURL,
+        jellyPartyId: jellyPartyId,
+      };
       chrome.runtime.sendMessage(extensionId, obj, function(response) {
         if (!response.success) {
           console.log(
