@@ -49,7 +49,7 @@ export default {
     if (!redirectURL || !jellyPartyId) {
       this.urlError = true;
     } else {
-      permissionURL = redirectURL.match(/https?:\/\/.+?\/?/)[0];
+      permissionURL = redirectURL.match(/https?:\/\/.+\/?/)[0];
       this.simplifiedURL = redirectURL.match(/https?:\/\/(.+?)\//)[1];
       // Next we must inform the background script that we would like to
       // be redirected to redirectURL. The background script will check
