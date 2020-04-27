@@ -16,7 +16,7 @@
           You will have to do this <b>once</b> for every website you want to use
           Jelly-Party on.
         </p>
-        <b-button block size="lg" class="mt-2" @click="grantPermissions"
+        <b-button block size="lg" class="mt-2" @click="requestPermissions"
           >Grant permissions now</b-button
         >
       </div>
@@ -49,7 +49,7 @@ export default {
     if (!redirectURL || !jellyPartyId) {
       this.urlError = true;
     } else {
-      permissionURL = redirectURL.match(/https?:\/\/.+?\//)[0];
+      permissionURL = redirectURL.match(/https?:\/\/.+?\/?/)[0];
       this.simplifiedURL = redirectURL.match(/https?:\/\/(.+?)\//)[1];
       // Next we must inform the background script that we would like to
       // be redirected to redirectURL. The background script will check
@@ -58,36 +58,23 @@ export default {
     }
   },
   methods: {
-    grantPermissions: function() {
-      chrome.permissions.request(
-        {
-          origins: [permissionURL],
-        },
-        function(granted) {
-          if (granted) {
-            console.log(
-              "Jelly-Party: Permission granted. Redirecting. Content script will now be inserted automatically, since permissions have been granted."
-            );
-          } else {
-            console.log("Jelly-Party: Permission not granted.");
-          }
-        }
-      );
-      this.requestRedirect();
-    },
-    requestRedirect: function() {
+    requestPermissions: function() {
       let obj = {
+        type: "requestPermissions",
         permissionURL: permissionURL,
         redirectURL: redirectURL,
         jellyPartyId: jellyPartyId,
       };
-      chrome.runtime.sendMessage(extensionId, obj, function(response) {
-        if (!response.success) {
-          console.log(
-            "Jelly-Party: It looks like we still need to ask for permissions for this website.."
-          );
-        }
-      });
+      chrome.runtime.sendMessage(extensionId, obj);
+    },
+    requestRedirect: function() {
+      let obj = {
+        type: "requestRedirect",
+        permissionURL: permissionURL,
+        redirectURL: redirectURL,
+        jellyPartyId: jellyPartyId,
+      };
+      chrome.runtime.sendMessage(extensionId, obj);
     },
   },
 };
