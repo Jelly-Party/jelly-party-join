@@ -5,7 +5,7 @@ module.exports = {
       entry: "src/main.js",
       template: "public/index.html",
       filename: "index.html",
-      title: "Join a Jelly-Party",
-    },
-  },
+      title: "Join a Jelly-Party"
+    }
+  }
 };

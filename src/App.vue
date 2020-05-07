@@ -19,6 +19,15 @@
         <b-button block size="lg" class="mt-2" @click="requestPermissions"
           >Grant permissions now</b-button
         >
+        <p class="mt-3">
+          If you don't yet have Jelly Party installed, make sure to
+          <b
+            ><a
+              href="https://chrome.google.com/webstore/detail/jelly-party/aiecbkandfgpphpdilbaaagnampmdgpd"
+              >get it for free here</a
+            >.</b
+          >
+        </p>
       </div>
       <div v-else class="p-3 wrapper">
         <h1>Uh-Oh</h1>
@@ -63,7 +72,7 @@ export default {
         type: "requestPermissions",
         permissionURL: permissionURL,
         redirectURL: redirectURL,
-        jellyPartyId: jellyPartyId,
+        jellyPartyId: jellyPartyId
       };
       chrome.runtime.sendMessage(extensionId, obj);
     },
@@ -72,11 +81,11 @@ export default {
         type: "requestRedirect",
         permissionURL: permissionURL,
         redirectURL: redirectURL,
-        jellyPartyId: jellyPartyId,
+        jellyPartyId: jellyPartyId
       };
       chrome.runtime.sendMessage(extensionId, obj);
-    },
-  },
+    }
+  }
 };
 </script>
 
