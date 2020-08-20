@@ -1,17 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
+    <title>Join a Jelly-Party</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+      }
+      #install-button {
+        font-size: 1.3em;
+        cursor: pointer;
+        border-radius: 3px;
+        background-color: #ff9494;
+        color: white;
+        border: 0;
+        padding: 0.5em;
+        transition: all 300ms ease;
+      }
+      #install-button:hover {
+        background-color: #9164ff;
+      }
+      #explanation {
+        transition: all 2s ease;
+        opacity: 0;
+      }
+      #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin: 0 auto;
+        background: linear-gradient(
+          to bottom right,
+          rgba(145, 100, 255, 0.2) 0%,
+          rgba(139, 255, 244, 0.2) 100%
+        );
+      }
+
+      #permissions-request-wrapper {
+        height: 100%;
+      }
+
+      .wrapper {
+        max-width: 30em;
+      }
+    </style>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <div id="app" style="height: 100vh;">
+      <div
+        id="permissions-request-wrapper"
+        style="display: flex; align-items: center; justify-content: center;"
+      >
+        <div id="explanation" class="p-3 wrapper">
+          <h1>No Jelly Party installation detected</h1>
+          <p>
+            If you're stuck on this site, you probably haven't yet installed
+            Jelly Party. If you have any problems with the installation, feel
+            free to hop on our
+            <a href="https://discord.gg/H3dExqc">Discord channel.</a>
+          </p>
+          <a href="https://www.jelly-party.com/">
+            <button id="install-button">
+              Install Jelly Party
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <script>
+      setTimeout(() => {
+        document.querySelector("#explanation").style.opacity = "1";
+      }, 1000);
+    </script>
   </body>
 </html>
